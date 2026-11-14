@@ -1,6 +1,7 @@
 modLoader="javafml"
 loaderVersion="[4,)"
-license="All Rights Reserved"
+# Original code; supplied media retain their separate rights. See THIRD_PARTY_NOTICES.
+license="GPL-3.0-only"
 
 [[mods]]
 modId="cwi_menu"

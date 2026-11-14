@@ -1,0 +1,24 @@
+CWI Menu licensing scope
+
+Original CWI Menu code is licensed under the GNU General Public License,
+version 3 only (SPDX-License-Identifier: GPL-3.0-only). See LICENSE.
+
+Supplied artwork and music
+
+The PNG artwork and filtering metadata under
+kubejs/assets/cwi/textures/gui/menu/ and the supplied music at
+src/main/resources/assets/cwi_menu/sounds/menu.ogg are excluded from the code
+license. In the distribution JAR the music is assets/cwi_menu/sounds/menu.ogg.
+These media were supplied through the legacy CWI pack and remain subject to
+their respective rights holders' terms. Original media authors and affirmative
+redistribution permissions are not documented in the available provenance.
+This repository grants no additional rights to these media files and does not
+represent them as GPL-licensed. Conversion of the track to Vorbis does not
+change its licensing status.
+
+Gradle wrapper
+
+Gradle wrapper bootstrap files retain their Apache-2.0 license. The original
+license, notice and scoped attribution are preserved at gradle/wrapper/LICENSE,
+gradle/wrapper/NOTICE and gradle/wrapper/ATTRIBUTION. Those distribution-wide
+notices do not imply all downloaded Gradle components are embedded in CWI Menu.

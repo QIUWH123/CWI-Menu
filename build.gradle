@@ -41,6 +41,7 @@ tasks.named('jar') {
     preserveFileTimestamps = false
     reproducibleFileOrder = true
     manifest.attributes('Implementation-Title': mod_name, 'Implementation-Version': project.version.toString())
+    from(files('LICENSE', 'THIRD_PARTY_NOTICES')) { into 'META-INF' }
 }
 tasks.named('test', Test) { failOnNoDiscoveredTests = false }
 tasks.register('testMenuContracts', JavaExec) {

@@ -17,5 +17,4 @@ __pycache__/
 
 # Supplementary mod documentation stays local; canonical guide is in the pack.
 /docs/
-/README.md
 /AGENTS.md

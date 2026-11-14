@@ -1,0 +1,18 @@
+{
+  "menu.cwi.singleplayer": "单人游戏",
+  "menu.cwi.multiplayer": "多人游戏",
+  "menu.cwi.option": "选项",
+  "menu.cwi.quit": "退出游戏",
+  "cwi_menu.resume": "继续上次会话",
+  "cwi_menu.no_session": "没有可继续的会话",
+  "cwi_menu.reload": "重新加载资源",
+  "cwi_menu.create": "机械动力菜单",
+  "cwi_menu.create_unavailable": "机械动力不可用",
+  "cwi_menu.resume_local": "继续：%s / 单人游戏",
+  "cwi_menu.resume_server": "继续：%s / 多人游戏",
+  "cwi_menu.help.create": "机械动力：打开机械动力菜单",
+  "cwi_menu.help.reload": "重新加载资源：刷新已启用的资源包",
+  "cwi_menu.help.mods": "模组：查看已安装的模组",
+  "cwi_menu.help.accessibility": "辅助功能：打开辅助功能设置",
+  "cwi_menu.help.language": "语言：选择游戏语言"
+}

@@ -1,0 +1,109 @@
+plugins {
+    id 'java-library'
+    id 'idea'
+    id 'net.neoforged.moddev' version '2.0.148'
+}
+
+version = mod_version
+group = mod_group_id
+base { archivesName = mod_id }
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
+
+repositories { mavenCentral() }
+
+neoForge {
+    version = neoforge_version
+    addModdingDependenciesTo sourceSets.test
+    runs {
+        client {
+            client()
+            gameDirectory = file('run')
+        }
+    }
+    mods {
+        "${mod_id}" { sourceSet sourceSets.main }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+    options.compilerArgs += ['-proc:none']
+}
+tasks.named('processResources') {
+    inputs.property('mod_version', project.version.toString())
+    filesMatching('META-INF/neoforge.mods.toml') {
+        expand(mod_version: project.version.toString())
+    }
+    exclude '**/.DS_Store'
+}
+tasks.named('jar') {
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+    manifest.attributes('Implementation-Title': mod_name, 'Implementation-Version': project.version.toString())
+}
+tasks.named('test', Test) { failOnNoDiscoveredTests = false }
+tasks.register('testMenuContracts', JavaExec) {
+    dependsOn testClasses
+    classpath = sourceSets.test.runtimeClasspath
+    mainClass = 'net.quiwh.cwimenu.MenuContracts'
+}
+tasks.register('verifyExternalTextures') {
+    group = 'verification'
+    description = 'Check that menu artwork is external and all required images have metadata.'
+    def inventory = layout.projectDirectory.file('gradle/menu-textures.json')
+    def textures = layout.projectDirectory.dir('kubejs/assets/cwi/textures/gui/menu')
+    inputs.file(inventory)
+    inputs.dir(textures)
+    inputs.files(fileTree('src/main/resources'))
+    doLast {
+        def bundled = fileTree('src/main/resources').matching {
+            include '**/textures/**', '**/*.png', '**/*.jpg', '**/*.jpeg', '**/*.webp', '**/*.gif', '**/*.tga'
+        }.files
+        if (!bundled.empty) throw new GradleException("Menu textures belong under kubejs/assets/cwi/textures/gui/menu: ${bundled}")
+        def assets = new groovy.json.JsonSlurper().parse(inventory.asFile)
+        assets.requiredTextures.each { filename ->
+            def png = textures.file(filename).asFile
+            if (!png.isFile() || !new File(png.path + '.mcmeta').isFile()) {
+                throw new GradleException("Missing external texture or metadata: ${png.name}")
+            }
+        }
+    }
+}
+tasks.register('verifyTextureFreeJar') {
+    group = 'verification'
+    description = 'Reject textures in the actual menu JAR, including stale build outputs.'
+    dependsOn 'jar'
+    inputs.file(tasks.named('jar').flatMap { it.archiveFile })
+    doLast {
+        def artifact = tasks.named('jar').get().archiveFile.get().asFile
+        new java.util.zip.ZipFile(artifact).withCloseable { archive ->
+            def textures = archive.entries().findAll { entry ->
+                entry.name.contains('/textures/') ||
+                        entry.name ==~ /(?i).*\.(png|jpe?g|webp|gif|tga)(\.mcmeta)?$/
+            }
+            if (!textures.empty) throw new GradleException("Textures found in menu JAR: ${textures*.name}")
+        }
+    }
+}
+tasks.register('kubejsAssetsZip', Zip) {
+    group = 'distribution'
+    description = 'Package the separate menu textures with their instance-relative KubeJS paths.'
+    dependsOn 'verifyExternalTextures'
+    archiveBaseName = mod_id
+    archiveClassifier = 'kubejs-assets'
+    destinationDirectory = layout.buildDirectory.dir('distributions')
+    preserveFileTimestamps = false
+    reproducibleFileOrder = true
+    from('kubejs/assets/cwi/textures/gui/menu') {
+        into 'kubejs/assets/cwi/textures/gui/menu'
+        exclude '**/.DS_Store'
+    }
+}
+tasks.named('check') { dependsOn 'testMenuContracts', 'verifyExternalTextures', 'verifyTextureFreeJar' }
+tasks.named('assemble') { dependsOn 'kubejsAssetsZip' }
+idea.module {
+    downloadSources = true
+    downloadJavadoc = true
+    excludeDirs += files('run', 'out', 'libs')
+}

@@ -1,0 +1,5 @@
+The Gradle wrapper bootstrap is provided under the Apache License, Version 2.0.
+The adjacent LICENSE and NOTICE are reproduced unmodified from the Gradle 9.2.1
+distribution. Those upstream notices also describe downloaded distribution
+components; they do not imply those components are embedded in CWI Menu.
+CWI Menu's own license remains as declared in its loader metadata.

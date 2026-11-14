@@ -1,0 +1,21 @@
+{
+  "requiredTextures": [
+    "title.png",
+    "steel_l.png",
+    "steel_l_hover.png",
+    "accessibility.png",
+    "accessibility_hover.png",
+    "create.png",
+    "create_hover.png",
+    "language.png",
+    "language_hover.png",
+    "last_world.png",
+    "last_world_hover.png",
+    "modlist.png",
+    "modlist_hover.png",
+    "resource.png",
+    "resource_hover.png",
+    "background_1.png",
+    "background_2.png"
+  ]
+}

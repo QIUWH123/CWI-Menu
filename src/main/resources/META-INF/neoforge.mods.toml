@@ -1,0 +1,28 @@
+modLoader="javafml"
+loaderVersion="[4,)"
+license="All Rights Reserved"
+
+[[mods]]
+modId="cwi_menu"
+version="${mod_version}"
+displayName="CWI Menu"
+authors="QUIWH"
+description='''Native menu presentation for Create Wasteland Industry.'''
+displayTest="IGNORE_ALL_VERSION"
+
+[[dependencies.cwi_menu]]
+modId="neoforge"
+type="required"
+versionRange="[21.1.264,21.2)"
+ordering="NONE"
+side="CLIENT"
+
+[[dependencies.cwi_menu]]
+modId="minecraft"
+type="required"
+versionRange="[1.21.1,1.21.2)"
+ordering="NONE"
+side="CLIENT"
+
+[[mixins]]
+config="cwi_menu.mixins.json"

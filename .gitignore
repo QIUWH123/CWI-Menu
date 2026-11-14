@@ -1,0 +1,21 @@
+/.gradle/
+/build/
+/out/
+/run/
+/libs/
+/.idea/
+*.iml
+*.iws
+*.ipr
+.DS_Store
+__pycache__/
+/dist/
+/tools/
+/.run/
+.env
+.env.*
+
+# Supplementary mod documentation stays local; canonical guide is in the pack.
+/docs/
+/README.md
+/AGENTS.md

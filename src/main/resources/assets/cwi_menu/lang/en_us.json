@@ -1,0 +1,18 @@
+{
+  "menu.cwi.singleplayer": "Singleplayer",
+  "menu.cwi.multiplayer": "Multiplayer",
+  "menu.cwi.option": "Options",
+  "menu.cwi.quit": "Quit Game",
+  "cwi_menu.resume": "Resume last session",
+  "cwi_menu.no_session": "No saved session is available",
+  "cwi_menu.reload": "Reload resources",
+  "cwi_menu.create": "Create menu",
+  "cwi_menu.create_unavailable": "Create is unavailable",
+  "cwi_menu.resume_local": "Continue: %s / Singleplayer",
+  "cwi_menu.resume_server": "Continue: %s / Multiplayer",
+  "cwi_menu.help.create": "Create: Open the Create menu",
+  "cwi_menu.help.reload": "Reload resources: Reload active resource packs",
+  "cwi_menu.help.mods": "Mods: View installed mods",
+  "cwi_menu.help.accessibility": "Accessibility: Open accessibility settings",
+  "cwi_menu.help.language": "Language: Choose the game language"
+}

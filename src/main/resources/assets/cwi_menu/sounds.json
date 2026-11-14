@@ -1,0 +1,10 @@
+{
+  "menu": {
+    "sounds": [
+      {
+        "name": "cwi_menu:menu",
+        "stream": true
+      }
+    ]
+  }
+}
